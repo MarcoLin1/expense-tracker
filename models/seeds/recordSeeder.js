@@ -15,5 +15,8 @@ db.once('open', () => {
     { name: '買手機', category: '休閒娛樂', date: '2021/3/29', amount: 5000, icon: 'fas fa-grin-beam' },
     { name: '計程車', category: '交通行出', date: '2021/3/20', amount: 300, icon: 'fas fa-shuttle-van' }
   )
-  console.log('mongodb connected')
+    .then(() => {
+      console.log('mongodb connected')
+      db.close()
+    })
 })

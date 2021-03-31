@@ -4,6 +4,7 @@ const port = 3000
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const Record = require('./models/record')
+const bodyParser = require('body-parser')
 const db = mongoose.connection
 
 mongoose.connect('mongodb://localhost/expense-tracker', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -18,6 +19,7 @@ db.once('open', () => {
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+app.use(bodyParser.urlencoded({ extends: true }))
 
 
 app.get('/', (req, res) => {
@@ -42,16 +44,30 @@ app.get('/', (req, res) => {
     }
   ]).exec()
 
-  // Record.find()
-  //   .lean()
-  //   .then(records => res.render('index', { records: records, totalAmount: amount }))
-  //   .catch(error => console.log(error))
-
   Promise.all([records, amount])
     .then(([records, amount]) => {
       const totalAmount = amount[0]
       res.render('index', { totalAmount, records })
     })
+    .catch(error => console.log(error))
+})
+
+app.get('/records/new', (req, res) => {
+  return res.render('new')
+})
+
+app.post('/records', (req, res) => {
+  console.log(req.body)
+  let { name, Category, date, amount } = req.body
+  let [category, icon] = Category.split('/')
+  return Record.create({
+    name: name,
+    category: category,
+    date: date,
+    amount: amount,
+    icon: icon
+  })
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
