@@ -8,14 +8,16 @@ const recordSchema = new Schema({
     type: String,
   },
   date: {
-    type: Date,
-    default: Date.now
+    type: String,
   },
   amount: {
     type: Number,
   },
-  categoryIcon: {
+  icon: {
     type: String,
+  },
+  totalAmount: {
+    type: String
   }
 })
 
