@@ -21,7 +21,7 @@ app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({ extends: true }))
 
-
+// 首頁
 app.get('/', (req, res) => {
   const amount = Record.aggregate([
     {
@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
         amount: { $sum: '$amount' },
       }
     }
-  ]).exec()
+  ])
 
   const records = Record.aggregate([
     {
@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
         icon: 1
       }
     }
-  ]).exec()
+  ])
 
   Promise.all([records, amount])
     .then(([records, amount]) => {
@@ -52,10 +52,12 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// 新增支出頁面
 app.get('/records/new', (req, res) => {
   return res.render('new')
 })
 
+// 按下新增支出後
 app.post('/records', (req, res) => {
   console.log(req.body)
   let { name, Category, date, amount } = req.body
@@ -67,6 +69,29 @@ app.post('/records', (req, res) => {
     amount: amount,
     icon: icon
   })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
+// 修改頁面
+app.get('/records/:id/edit', (req, res) => {
+  Record.findById(req.params.id)
+    .lean()
+    .then(records => res.render('edit', { records: records }))
+    .catch(error => console.log(error))
+})
+
+// 修改頁面中，按下送出鈕後將資料儲存到mongodb 
+app.post('/records/:id', (req, res) => {
+  let records = req.body
+  return Record.findById(req.params.id)
+    .then(record => {
+      record.name = records.name
+      record.category = records.category
+      record.date = records.date
+      record.amount = records.amount
+      return record.save()
+    })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })

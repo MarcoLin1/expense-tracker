@@ -26,11 +26,15 @@
 
           <div class="col-6" style="display: flex; justify-content:center; align-items:center">
             <h5 class="col-4">{{this.amount}}</h5>
-            <button class="btn btn-sm mr-1 editBtn"
-              style="border-radius: 25%; border:1px solid #f5f5f5; color:#aaaaaa"><i class="fas fa-edit"></i></button>
-            <button class="btn btn-sm mr-1 deleteBtn"
-              style="border-radius: 25%; border:1px solid #f5f5f5; color:#aaaaaa" onclick="removing()"><i
-                class="fas fa-trash-alt"></i></button>
+            <form action="/records/{{this._id}}/edit" method="GET">
+              <button class="btn btn-sm mr-1 editBtn"
+                style="border-radius: 25%; border:1px solid #f5f5f5; color:#aaaaaa"><i class="fas fa-edit"></i></button>
+            </form>
+            <form action="/records/delete">
+              <button class="btn btn-sm mr-1 deleteBtn"
+                style="border-radius: 25%; border:1px solid #f5f5f5; color:#aaaaaa" onclick="removing()"><i
+                  class="fas fa-trash-alt"></i></button>
+            </form>
           </div>
 
         </div>
