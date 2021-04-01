@@ -87,11 +87,19 @@ app.post('/records/:id', (req, res) => {
   return Record.findById(req.params.id)
     .then(record => {
       record.name = records.name
-      record.category = records.category
+      record.category = records.Category.split('/')[0]
       record.date = records.date
       record.amount = records.amount
       return record.save()
     })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
+// 刪除資料
+app.get('/records/:id/delete', (req, res) => {
+  return Record.findById(req.params.id)
+    .then(record => record.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
