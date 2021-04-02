@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
     {
       $group: {
         _id: null,
-        amount: { $sum: '$amount' },
+        total: { $sum: '$amount' },
       }
     }
   ])
@@ -102,6 +102,43 @@ app.get('/records/:id/delete', (req, res) => {
     .then(record => record.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
+})
+
+// 篩選資料
+app.get('/records/filter', (req, res) => {
+  const filter = req.query.filter
+  const amountFilter = Record.aggregate([
+    { $match: { category: filter } },
+    {
+      $group: {
+        _id: null,
+        total: { $sum: '$amount' },
+      }
+    }
+  ])
+  const recordFilter = Record.aggregate([
+    { $match: { category: filter } },
+    {
+      $project: {
+        name: 1,
+        category: 1,
+        amount: 1,
+        date: 1,
+        icon: 1,
+      }
+    }
+  ])
+  if (filter) {
+    Promise.all([amountFilter, recordFilter])
+      .then(([amountFilter, records]) => {
+        const totalAmount = amountFilter[0]
+        res.render('index', { totalAmount, records, filter })
+      })
+      .catch(error => console.log(error))
+  } else {
+    Promise.all([amountFilter, recordFilter])
+      .then(() => res.redirect('/'))
+  }
 })
 
 app.listen(port, () => {
