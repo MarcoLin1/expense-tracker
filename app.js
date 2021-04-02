@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const Port = process.env.Port || 3000
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
@@ -20,5 +20,5 @@ app.use(methodOverride('_method'))
 app.use(routes)
 
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`)
+  console.log(`Server is running on http://localhost:${Port}`)
 })
