@@ -1,0 +1,48 @@
+body {
+  background-color: rgb(218, 230, 230);
+}
+
+.navbar {
+  border: none;
+}
+
+.total:hover {
+  color: rgb(150, 14, 14);
+  font-size: 40px;
+}
+
+.editBtn:hover {
+  background-color: darkgoldenrod;
+  font-size: 20px;
+}
+
+.fa-edit:hover {
+    color: aliceblue;
+}
+
+.deleteBtn:hover {
+  font-size: 20px;
+  background-color: darkred;
+}
+
+.fa-trash-alt:hover {
+  color: aliceblue;
+}
+
+.addBtn:hover {
+  background-color: rgb(96, 140, 160);
+  color: aliceblue;
+}
+
+.filterBtn:hover {
+  background-color: rgb(110, 170, 170);
+  color: aliceblue;
+}
+
+.list-group-item {
+  background-color: rgb(218, 230, 230);
+  border-radius: 10%;
+  border: none;;
+}
+
+

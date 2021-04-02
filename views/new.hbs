@@ -1,21 +1,21 @@
-<div class="container mt-5"
+<div class="container mt-4"
   style="width: 30%; display:flex;justify-content:center; background-color:gainsboro; border-radius:10%">
   <form action="/records" method="POST">
-    <h3 class="title mb-5 mt-5">請輸入你的支出</h3>
+    <h3 class="title mb-3 mt-3">請輸入你的支出</h3>
 
-    <div class="form-group row mb-5">
-      <label for="name" class="mr-2 col-form-label">名稱</label>
-      <input type="text" name="name" id="name">
+    <div class="form-group row mb-3">
+      <label for="name" class="mr-2 col-form-label" style="text-align: center;">名稱</label>
+      <input class="form-control" type="text" name="name" id="name">
     </div>
 
-    <div class="form-group row mb-5">
+    <div class="form-group row mb-3">
       <label for="date" class="mr-2 col-form-label">日期</label>
-      <input type="date" name="date" id="date">
+      <input class="form-control" type="date" name="date" id="date">
     </div>
 
-    <div class="form-group row mb-5">
+    <div class="form-group row mb-3">
       <label for="Category" class="mr-2 col-form-label">類別</label>
-      <select name="Category" id="Category">
+      <select class="form-control" name="Category" id="Category">
         <option value="家居物業/fas fa-home">家居物業</option>
         <option value="交通出行/fas fa-shuttle-van">交通出行</option>
         <option value="休閒娛樂/fas fa-grin-beam">休閒娛樂</option>
@@ -24,13 +24,12 @@
       </select>
     </div>
 
-    <div class="form-group row mb-5">
+    <div class="form-group row mb-3">
       <label for="amount" class="mr-2 col-form-label">金額</label>
-      <input type="number" name="amount" id="amount">
+      <input class="form-control" type="number" name="amount" id="amount">
     </div>
-    <div class="row mb-5" style="display: flex; justify-content:center">
-      <button id="submit-btn" class="btn btn-danger" type="submit">新增支出</button>
+    <div class="row mb-3" style="display: flex; justify-content:center">
+      <button id="submit-btn" class="btn btn-outline-success" type="submit"><i class="fas fa-save fa-lg"></i></button>
     </div>
-
   </form>
 </div>
