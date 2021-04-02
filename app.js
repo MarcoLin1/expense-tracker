@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const Record = require('./models/record')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const db = mongoose.connection
 
 mongoose.connect('mongodb://localhost/expense-tracker', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -20,6 +21,7 @@ db.once('open', () => {
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({ extends: true }))
+app.use(methodOverride('_method'))
 
 // 首頁
 app.get('/', (req, res) => {
@@ -82,7 +84,7 @@ app.get('/records/:id/edit', (req, res) => {
 })
 
 // 修改頁面中，按下送出鈕後將資料儲存到mongodb 
-app.post('/records/:id', (req, res) => {
+app.put('/records/:id', (req, res) => {
   let records = req.body
   return Record.findById(req.params.id)
     .then(record => {
@@ -97,7 +99,7 @@ app.post('/records/:id', (req, res) => {
 })
 
 // 刪除資料
-app.get('/records/:id/delete', (req, res) => {
+app.delete('/records/:id', (req, res) => {
   return Record.findById(req.params.id)
     .then(record => record.remove())
     .then(() => res.redirect('/'))

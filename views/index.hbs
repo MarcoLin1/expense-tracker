@@ -42,7 +42,7 @@
               <button class="btn btn-sm mr-1 editBtn"
                 style="border-radius: 25%; border:1px solid #f5f5f5; color:#aaaaaa"><i class="fas fa-edit"></i></button>
             </form>
-            <form action="/records/{{this._id}}/delete">
+            <form action="/records/{{this._id}}?_method=DELETE" method="POST">
               <button class="btn btn-sm mr-1 deleteBtn"
                 style="border-radius: 25%; border:1px solid #f5f5f5; color:#aaaaaa" onclick="removing()"><i
                   class="fas fa-trash-alt"></i></button>
