@@ -1,12 +1,5 @@
-const mongoose = require('mongoose')
 const Category = require('../category')
-const db = mongoose.connection
-
-mongoose.connect('mongodb://localhost/expense-tracker', { useNewUrlParser: true, useUnifiedTopology: true })
-
-db.on('error', () => {
-  console.log('mongodb error')
-})
+const db = require('../../config/mongoose')
 
 db.once('open', () => {
   Category.create(
@@ -16,7 +9,7 @@ db.once('open', () => {
     { category: '交通出行', categoryIcon: 'fas fa-shuttle-van' }
   )
     .then(() => {
-      console.log('mongodb connected')
+      console.log('categorySeeder done')
       db.close()
     })
 })
