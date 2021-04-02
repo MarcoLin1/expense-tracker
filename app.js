@@ -19,6 +19,6 @@ app.use(methodOverride('_method'))
 
 app.use(routes)
 
-app.listen(port, () => {
+app.listen(Port, () => {
   console.log(`Server is running on http://localhost:${Port}`)
 })
