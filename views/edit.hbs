@@ -1,7 +1,6 @@
-<div class="container mt-4"
-  style="width: 30%; display:flex;justify-content:center; background-color:gainsboro; border-radius:10%">
-  <form action="/records/{{records._id}}?_method=PUT" method="POST">
-    <h3 class="title mb-3 mt-3">請修改你的支出</h3>
+<div class="container edit__expense__container">
+  <form action="/records/{{records._id}}?_method=PUT" method="POST" class="edit__expense__form">
+    <h3 class="edit__expense__title mb-3 mt-3">請修改你的支出</h3>
 
     <div class="form-group row mb-3">
       <label for="name" class="mr-2 col-form-label">名稱</label>
