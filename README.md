@@ -2,6 +2,8 @@
 
 Account book established by Node.js and Express
 
+Demo: https://blooming-plains-79564.herokuapp.com/
+
 # Features
 
 1. Click "+" icon that you can add new expense record in this website
